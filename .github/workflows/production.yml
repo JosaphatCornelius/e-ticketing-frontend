@@ -1,0 +1,81 @@
+name: Production
+
+env:
+  REGISTRY: ghcr.io
+  NAMESPACE: josaphatcornelius
+  DOCKER_TAG: ${{ github.event.release.tag_name }}
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build React Production
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ github.event.repository.name }}:${{env.DOCKER_TAG}}
+          build-args: |
+            VITE_API_URL=${{ vars.VITE_API_URL }}
+
+  deploy:
+    runs-on: ubuntu-24.04
+    needs: build
+    permissions:
+      contents: read
+      packages: read
+    environment: production
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - name: Setup SSH and Docker Context
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_IP: ${{ secrets.VPS_IP }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$VPS_SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$VPS_IP" > ~/.ssh/known_hosts
+          docker context create personal-vps --docker "host=ssh://${VPS_USER}@${VPS_IP}"
+
+      - name: Deploy Compose
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHCR_USER: ${{ github.actor }}
+          DOCKER_TAG: ${{ env.DOCKER_TAG }}
+          REGISTRY: ${{ env.REGISTRY }}
+          NAMESPACE: ${{ env.NAMESPACE }}
+          CONTAINER_NAME: ${{ github.event.repository.name }}
+        run: |
+          echo "$GHCR_TOKEN" | docker --context personal-vps login ghcr.io --username "$GHCR_USER" --password-stdin
+          docker --context personal-vps compose -f docker-compose.yml up -d
+          docker --context personal-vps image prune -f
