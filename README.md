@@ -2,7 +2,7 @@
 
 Build Status is Deployed in Personal VPS
 
-This is a full-stack app that I made back in senior high school. There's many things to improve in either the frontend and backemd.
+The frontend to a full-stack app that I made back in senior high school. There's many things to improve in this frontend.
 
 ## Tech Stack
 
