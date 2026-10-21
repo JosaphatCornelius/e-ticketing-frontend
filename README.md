@@ -1,6 +1,6 @@
-# [E-Ticketing-Frontend]
+# e-ticketing-frontend
 
-Build Status is Deployed in Personal VPS
+Build Status: Deployed
 
 The frontend to a full-stack app that I made back in senior high school. There's many things to improve in this frontend.
 
