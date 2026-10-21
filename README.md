@@ -1,42 +1,37 @@
-## Project title
-E-Ticketing Frontend
+# e-ticketing-frontend
 
-## Motivation
-Website for ([E-Ticketing Backend](https://github.com/JosaphatCornelius/E-Ticketing_Backend)). Build with Minimal UI as the template when I was on 12th grade senior high.
+Build Status: Deployed
 
-## Build status
-CI/CD workflow in progress.
+The frontend to a full-stack app that I made back in senior high school. There's many things to improve in this frontend.
 
-## Code style
-NextJS with Typescript best practices.
- 
-## Screenshots
-Work in progress.
+## Tech Stack
 
-## Tech/framework used
-<b>Built with</b>
-- [NextJS](https://nextjs.org/)
+* **Core:** [React, ASP .NET Core]
+* **Database:** [PostgreSQL, Entity Framework Core]
+* **Infrastructure:** [Docker]
 
-## Features
-Full-stack E-Ticketing application.
+## Quick Start
 
-## Installation
-Make sure to have Node installed, then run npm install or use any other package manager.
+Instructions to get the development environment running locally.
 
-## API Reference
-None.
+```bash
+# Clone the repository
+git clone https://github.com/JosaphatCornelius/e-ticketing-frontend.git
+cd project-name
 
-## Tests
-None.
+# Install dependencies and run
+npm install
+npm run dev
+```
 
-## How to use?
-Clone, then install the dependencies and run it.
+## Usage
 
-## Contribute
-Point out flaws in my logic when I was in senior high would be great!
+```javascript
+npm run dev
+```
 
-## Credits
-Minimal UI ([Free version](https://free.minimals.cc/))
+## Contributing & License
 
-## License
-None.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Distributed under the [License Name] License. See `LICENSE` for more information.
