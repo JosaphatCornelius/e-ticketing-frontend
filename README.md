@@ -1,4 +1,4 @@
-# e-ticketing-frontend
+# E-Ticketing-Frontend
 
 Build Status: Deployed
 
