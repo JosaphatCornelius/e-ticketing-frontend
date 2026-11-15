@@ -6,18 +6,18 @@ The frontend to a full-stack app that I made back in senior high school. There's
 
 ## Tech Stack
 
-* **Core:** [React, ASP .NET Core]
-* **Database:** [PostgreSQL, Entity Framework Core]
-* **Infrastructure:** [Docker]
+- **Core:** [React, TypeScript, Vite]
+- **Database:** [Handled by the backend]
+- **Infrastructure:** [Docker, Nginx]
 
 ## Quick Start
 
 Instructions to get the development environment running locally.
 
-```bash
+```
 # Clone the repository
 git clone https://github.com/JosaphatCornelius/e-ticketing-frontend.git
-cd project-name
+cd e-ticketing-frontend
 
 # Install dependencies and run
 npm install
@@ -26,12 +26,14 @@ npm run dev
 
 ## Usage
 
-```javascript
+```
 npm run dev
 ```
 
 ## Contributing & License
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Currently unlicensed. All rights reserved.
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Distributed under the [License Name] License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE.md` for more information.
